@@ -1,0 +1,105 @@
+---
+title: "Computational thinking"
+author: "Emily Nazario"
+format:
+ html: 
+  self-contained: TRUE
+editor: visual
+toc: TRUE
+toc-title: "On this page"
+theme: yeti
+fontcolor: "#134f5c"
+---
+
+## Question one
+
+```{r}
+#| echo: true
+#| message: false
+#| label: Q1
+
+species_codes <- c(GREG = "Great Egret", MALL = "Mallard", MAWR = "Marsh Wren", KILL = "Killdeer")
+
+sightings = c("GREG", "GREG", "MALL", "MAWR", "KILL", "GREG")
+
+# Modify this line to use species_codes so your counts have common names
+table(species_codes[sightings])
+```
+
+## Question two
+
+**Part One:** Adding a 1 will increase a `POSIXct` object by one second because `POSIXct` vector values represent the number of seconds since 1970-01-01. The type of `POSIXct` is a double vector. It uses this format to represent number of seconds since the above date. 
+
+**Part Two:** The default origin is 1970-01-01.  
+
+```{r}
+#| message: false
+#| label: Q2
+
+x <- 0
+x <- as.POSIXct(x, tz = "UTC", origin = "2000-01-01 12:00:00")
+x <- as.double(x)
+
+typeof(x)
+```
+
+**Part Three:** This is now a double representing the number of seconds since Jan 01, 1970. 
+
+## Question three 
+
+```{r}
+#| message: false
+#| label: Q3
+
+x <- list(1, 2, 3)
+y <- x[2]
+z <- x[[2]]
+```
+
+From the list, x, `y` is referencing the second entry within x which is everything stored in [[2]]. While `x` is specifically referencing the items within [[2]] and removing this 'higher' layer of information organization. 
+
+## Question four 
+
+**Part One:** Data frames are a list of vectors as columns. Though if 'list elements' refer to the infomration stored within a list, then I think this would refer to the rows. 
+
+**Part Two:** The length refers to the number of columns. The length function gets the length of vectors, and these are stored as columns within the data frame. 
+
+## Question five
+
+```{r}
+#| message: false
+#| label: Q5
+
+experiment <- data.frame(
+    plot = c("p1", "p2", "p3", "p4"),
+    N_g = c(0.2, 0.7, 0.3, 0.2),
+    P_g = c(0.1, 0.1, 0.5, 0.6)
+)
+
+nutrient <- "N_g"
+
+```
+
+I would use `experiment$N_g` or `experiment[,2]` to pull the information associated with the variable assigned to `nutrient`. The answer shouldn't change as it is already a longer vector where the individual values are atomic vectors.
+
+## Question six 
+
+```{r}
+#| message: false
+#| label: Q6
+
+library(palmerpenguins) 
+
+#STEP ONE#
+penguins_by_island <- split(penguins, penguins$island)
+
+#STEP TWO#
+mean_mass <- list(
+    Biscoe = mean(penguins_by_island$Biscoe$body_mass_g, na.rm = TRUE),
+    Dream = mean(penguins_by_island$Dream$body_mass_g, na.rm = TRUE),
+    Torgersen = mean(penguins_by_island$Torgersen$body_mass_g, na.rm = TRUE)
+)
+```
+
+
+The first step creates a list, `penguins_by_island`, by using the split function to sort the palmer penguins dataset into sub lists defined by island name (e.g., Biscoe, Dream, and Torgersen). Then, the following step creates a list of the three islands where each entry for that island is the mean body mass from the specific island grouping as set in step one. The na.rm argument removes any NAs from interfering with the mean calculation. 
