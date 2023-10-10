@@ -1,9 +1,7 @@
 ---
 title: "Computational thinking"
 author: "Emily Nazario"
-format:
- html: 
-  self-contained: TRUE
+format: gfm
 editor: visual
 toc: TRUE
 toc-title: "On this page"
